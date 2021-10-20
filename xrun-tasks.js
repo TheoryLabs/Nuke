@@ -78,7 +78,7 @@ const tasks = {
   },
 
   deploy: {
-    desc: `Vercel deployment tasks`,
+    desc: `[task:deploy] Vercel deployment tasks`,
     task: [`deployProductionBuildToVercel`]
   }
 };
