@@ -222,29 +222,75 @@ const tasks = {
 
   deployProductionBuildToVercel: {
     desc: `Create production build then deploy to Vercel task`,
-    task: function() {
-      // console.log(this)
-      // return pathToExecutable()
-      // return pathToExecutable(false)
-      // return pathToExecutable(`vercel`)
+    // task: function() {
+    //   // console.log(this)
+    //   // return pathToExecutable()
+    //   // return pathToExecutable(false)
+    //   // return pathToExecutable(`vercel`)
+    //
+    //   // return pathToExecutable(`vercel`, null)
+    //   // return pathToExecutable(`vercel`, false)
+    //   // return pathToExecutable(`vercel`, `path`)
+    //   // return pathToExecutable(`vercel`, `../path`)
+    //   // return pathToExecutable(`vercel`)
+    //   // return pathToExecutable(`vercel`, null)
+    //   // return pathToExecutable(`vercel`, `noop`)
+    //   // return pathToExecutable(`vercel`, `cwd`)
+    //   // return pathToExecutable(`vercel`, process.cwd())
+    //   // return pathToExecutable(`vercel`, `dir`)
+    //   // return pathToExecutable(`vercel`, __dirname)
+    //   // return pathToExecutable(`vercel`, `abc/*.js`)
+    //
+    //   const vercelExecutable = pathToExecutable(`vercel`)
+    //   // console.log(vercelExecutable)
+    //
+    //   exec(`${vercelExecutable} --prod`)
+    // }
+    task: exec(`vc --prod`)
+  },
 
-      // return pathToExecutable(`vercel`, null)
-      // return pathToExecutable(`vercel`, false)
-      // return pathToExecutable(`vercel`, `path`)
-      // return pathToExecutable(`vercel`, `../path`)
-      // return pathToExecutable(`vercel`)
-      // return pathToExecutable(`vercel`, null)
-      // return pathToExecutable(`vercel`, `noop`)
-      // return pathToExecutable(`vercel`, `cwd`)
-      // return pathToExecutable(`vercel`, process.cwd())
-      // return pathToExecutable(`vercel`, `dir`)
-      // return pathToExecutable(`vercel`, __dirname)
-      // return pathToExecutable(`vercel`, `abc/*.js`)
+  parseVercelEnvs: {
+    desc: `Parse environment variables file pulled from Vercel`,
+    // task: function() {
+    //   // console.log(this)
+    //   // return pathToExecutable()
+    //   // return pathToExecutable(false)
+    //   // return pathToExecutable(`vercel`)
+    //
+    //   // return pathToExecutable(`vercel`, null)
+    //   // return pathToExecutable(`vercel`, false)
+    //   // return pathToExecutable(`vercel`, `path`)
+    //   // return pathToExecutable(`vercel`, `../path`)
+    //   // return pathToExecutable(`vercel`)
+    //   // return pathToExecutable(`vercel`, null)
+    //   // return pathToExecutable(`vercel`, `noop`)
+    //   // return pathToExecutable(`vercel`, `cwd`)
+    //   // return pathToExecutable(`vercel`, process.cwd())
+    //   // return pathToExecutable(`vercel`, `dir`)
+    //   // return pathToExecutable(`vercel`, __dirname)
+    //   // return pathToExecutable(`vercel`, `abc/*.js`)
+    //
+    //   const vercelExecutable = pathToExecutable(`vercel`)
+    //   // console.log(vercelExecutable)
+    //
+    //   exec(`${vercelExecutable} --prod`)
+    // }
+    task: () => {
+      const dotenv = require('dotenv')
 
-      const vercelExecutable = pathToExecutable(`vercel`)
-      // console.log(vercelExecutable)
+      try {
+        const result = dotenv.config()
 
-      exec(`${vercelExecutable} --prod`)
+        if (result.error) {
+          throw result.error
+        }
+
+        console.log(result.parsed)  
+      }
+      catch(err) {
+        console.error(err)
+        throw err
+      }
     }
   },
 
