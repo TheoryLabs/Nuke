@@ -7,7 +7,11 @@
     "load": "node -r esm ./tasks/index.js",
     "tasks": "node -r esm -r @xarc/run xrun",
     "hello": "xrun hello",
-    "build": "xrun build"
+    "build": "xrun build",
+    "deploy:development": "xrun deploy --development",
+    "deploy:staging": "xrun deploy --staging",
+    "deploy:production": "xrun deploy --production",
+    "deploy": "xrun deploy"
   },
   "@xarc/run": {
     "npm": false
@@ -15,6 +19,8 @@
   "devDependencies": {
     "@xarc/run": "^1.0.5",
     "esm": "^3.2.25",
-    "rimraf": "^3.0.2"
+    "npm-which": "^3.0.1",
+    "rimraf": "^3.0.2",
+    "vercel": "^23.1.2"
   }
 }

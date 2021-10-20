@@ -47,6 +47,10 @@ const tasks = {
   buildTasksStartMessage: exec(`echo [TASK:build] Start - ${currDate.getTime()}`),
   buildTasksEndMessage: exec(`echo [TASK:build] End - ${currDate.getTime()}`),
 
+  timestamp: () => console.log({
+    timestamp: currDate.getTime()
+  }),
+
   removePublicDir: () => rimraf(`public`),
   createPublicDir: exec(`mkdir public`),
   createPublicRootIndex: exec(`touch ./public/index.html`),
@@ -63,7 +67,19 @@ const tasks = {
 
   build: {
     desc: `Custom build task`,
-    task: [`welecomeMessage`, `buildTasks`, `goodByeMessage`]
+    task: [`welecomeMessage`, `buildTasks`, `goodByeMessage`, `timestamp`]
+  },
+
+  deployProductionBuildToVercel: {
+    desc: `Create production build then deploy to Vercel task`,
+    task: function() {
+      console.log(this.argv)
+    }
+  },
+
+  deploy: {
+    desc: `Vercel deployment tasks`,
+    task: [`deployProductionBuildToVercel`]
   }
 };
 
